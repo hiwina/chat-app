@@ -1,0 +1,33 @@
+
+services:
+  app:
+    build: .
+    restart: "no"
+    volumes:
+      - ./:/app
+      - ./app-cache/:/app-cache
+    ports:
+      - 7777:7777
+    depends_on:
+      - database
+      - flyway
+    env_file:
+      - project.env
+
+  database:
+    container_name: database-server
+    image: postgres:14.1
+    restart: "no"
+    env_file:
+        - project.env
+
+  flyway:
+    image: flyway/flyway:9.11.0-alpine
+    depends_on:
+      - database
+    volumes:
+      - .:/flyway/sql
+    command: -connectRetries=60 -baselineOnMigrate=true migrate
+    env_file:
+      - project.env
+      
