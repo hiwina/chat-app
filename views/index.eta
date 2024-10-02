@@ -2,8 +2,8 @@
     
     <form action="/" method="POST">
         <input type="text" name="sender" placeholder="Your name" required>
-        <textarea name="message" placeholder="Type your message" required></textarea>
-        <button type="submit">Send</button>
+        <input name="message" placeholder="Type your message" required></textarea>
+        <input type="submit">Send</button>
     </form>
 
     <h2>Recent Messages</h2>
